@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poké-Trainer | Gestor de Equipo Pokémon</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#ef5350">
+</head>
+<body>
+  <div class="container">
+    <!-- Banner de estado de red / modo offline -->
+    <div id="offline-badge" class="offline-badge">
+      Modo sin conexión activo: Tus capturas se guardarán en el dispositivo para sincronizarse luego
+    </div>
+
+    <header class="app-header">
+      <h1>Poké-Trainer</h1>
+      <p class="subtitle">Explora Pokémon salvajes, captúralos y entrena a tu equipo personal</p>
+    </header>
+
+    <!-- Barra de sesión activa (visible tras iniciar sesión) -->
+    <div id="user-bar" class="user-bar hidden">
+      <div class="user-info">
+        <span>Entrenador: <strong id="display-username">-</strong></span>
+        <span class="badge-region" id="display-region">Kanto</span>
+      </div>
+      <div class="user-actions">
+        <label class="offline-toggle" title="Activa el modo sin conexión para capturar Pokémon sin internet">
+          <input type="checkbox" id="simulate-offline-chk">
+          <span>Modo Sin Conexión</span>
+        </label>
+        <button id="logout-btn" class="btn-secondary btn-sm">Cerrar Sesión</button>
+      </div>
+    </div>
+
+    <!-- Mensajes de estado / alerta -->
+    <div id="status-msg" class="status-msg hidden"></div>
+
+    <!-- =================================================================== -->
+    <!-- VISTA 1: LOGIN Y REGISTRO                                           -->
+    <!-- =================================================================== -->
+    <section id="auth-section" class="panel">
+      <h2>Acceso de Entrenador</h2>
+      <p class="section-desc">Inicia sesión o crea tu cuenta de entrenador para gestionar tu equipo Pokémon.</p>
+      
+      <div class="auth-tabs">
+        <button id="tab-login" class="tab-btn active">Iniciar Sesión</button>
+        <button id="tab-register" class="tab-btn">Registrarse</button>
+      </div>
+
+      <form id="auth-form" class="form-stack">
+        <div class="form-group">
+          <label for="auth-username">Usuario Entrenador</label>
+          <input type="text" id="auth-username" placeholder="Ej. ash_ketchum" required>
+        </div>
+        <div class="form-group">
+          <label for="auth-password">Contraseña</label>
+          <input type="password" id="auth-password" placeholder="••••••••" required>
+        </div>
+        <div class="form-group hidden" id="region-group">
+          <label for="auth-region">Región Inicial</label>
+          <select id="auth-region">
+            <option value="Kanto">Kanto</option>
+            <option value="Johto">Johto</option>
+            <option value="Hoenn">Hoenn</option>
+            <option value="Sinnoh">Sinnoh</option>
+          </select>
+        </div>
+        <button type="submit" id="auth-submit-btn" class="btn-primary">Entrar a la Pokédex</button>
+      </form>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- VISTA 2: CONTENIDO PRINCIPAL DE LA APLICACIÓN                       -->
+    <!-- =================================================================== -->
+    <main id="app-content" class="hidden">
+
+      <!-- Barra de Sincronización de Capturas Offline -->
+      <section id="sync-panel" class="panel sync-panel hidden">
+        <div class="sync-header">
+          <div>
+            <h3>Capturas Guardadas en el Dispositivo</h3>
+            <p class="section-desc">Tienes <strong id="queue-count">0</strong> Pokémon pendientes por sincronizar con tu cuenta.</p>
+          </div>
+          <div class="sync-buttons">
+            <button id="sync-now-btn" class="btn-warning btn-sm">
+              Sincronizar Equipo Ahora
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <div class="grid-layout">
+        <!-- COLUMNA IZQUIERDA: EXPLORADOR Y CAPTURA -->
+        <section class="panel">
+          <h2>Explorar Pokémon</h2>
+          <p class="section-desc">Encuentra un Pokémon por su nombre, número de Pokédex o al azar.</p>
+
+          <div class="search-bar">
+            <input type="text" id="poke-search-input" placeholder="Nombre o número (ej. pikachu o 25)">
+            <button id="search-poke-btn" class="btn-secondary">Buscar</button>
+            <button id="fetch-btn" class="btn-primary">Aleatorio</button>
+          </div>
+
+          <div id="loading" class="loading-box">Buscando Pokémon salvaje...</div>
+
+          <!-- Tarjeta del Pokémon explorado -->
+          <div id="poke-card" class="poke-preview-card">
+            <div class="poke-preview-header">
+              <span class="poke-badge" id="poke-id-badge">#25</span>
+              <h3 id="poke-name">PIKACHU</h3>
+              <span class="type-pill" id="poke-type">electric</span>
+            </div>
+            <img id="poke-img" src="" alt="pokemon">
+            <div class="poke-stats-row">
+              <span>Peso: <strong id="poke-weight">6.0 kg</strong></span>
+              <span>HP: <strong id="poke-hp">35</strong></span>
+              <span>ATQ: <strong id="poke-atk">55</strong></span>
+            </div>
+
+            <!-- Formulario interactivo para capturar -->
+            <div class="capture-form">
+              <input type="text" id="capture-nickname" placeholder="Apodo opcional (ej. Sparky)">
+              <input type="text" id="capture-notes" placeholder="Notas de entrenamiento o lugar de captura...">
+              <button type="button" id="capture-btn" class="btn-success">Capturar Pokémon</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- COLUMNA DERECHA: MI EQUIPO POKÉMON -->
+        <section class="panel">
+          <div class="panel-header-row">
+            <h2>Mi Equipo Pokémon</h2>
+            <span class="counter-pill">Capturados: <strong id="total-captures-count">0</strong></span>
+          </div>
+          <p class="section-desc">Entrena a tus Pokémon, márcalos como favoritos o libéralos.</p>
+
+          <!-- Filtros de búsqueda -->
+          <div class="filter-bar">
+            <input type="text" id="db-filter-input" placeholder="Buscar en mi equipo...">
+            <label class="fav-filter">
+              <input type="checkbox" id="db-fav-only"> Solo Favoritos
+            </label>
+            <button id="db-filter-btn" class="btn-secondary btn-sm">Buscar</button>
+          </div>
+
+          <!-- Lista de tarjetas del equipo -->
+          <div id="team-list" class="team-list">
+            <p class="empty-text">Aún no tienes Pokémon en tu equipo.</p>
+          </div>
+
+          <!-- Paginación -->
+          <div class="pagination-bar">
+            <button id="prev-page-btn" class="btn-secondary btn-sm" disabled>Anterior</button>
+            <span id="page-indicator">Página 1</span>
+            <button id="next-page-btn" class="btn-secondary btn-sm" disabled>Siguiente</button>
+          </div>
+        </section>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

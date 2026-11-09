@@ -1,0 +1,495 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: #121212;
+  color: #f1f5f9;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.app-header h1 {
+  color: #ef5350;
+  margin: 0 0 6px 0;
+  font-size: 2rem;
+}
+
+.subtitle {
+  color: #94a3b8;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Badges y alertas */
+.offline-badge {
+  background-color: #f59e0b;
+  color: #111827;
+  font-weight: 700;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-align: center;
+  display: none;
+  margin-bottom: 14px;
+}
+
+.status-msg {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.status-msg.success {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid #10b981;
+  color: #6ee7b7;
+}
+
+.status-msg.error {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+}
+
+.status-msg.info {
+  background: rgba(59, 130, 246, 0.2);
+  border: 1px solid #3b82f6;
+  color: #93c5fd;
+}
+
+/* Barra de usuario */
+.user-bar {
+  background: #1e293b;
+  border: 1px solid #334155;
+  padding: 12px 18px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.badge-region {
+  background: #ef5350;
+  color: white;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.offline-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  color: #fbbf24;
+  cursor: pointer;
+}
+
+/* Paneles y Grilla */
+.panel {
+  background-color: #1e1e1e;
+  border: 1px solid #2e2e2e;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.panel h2, .panel h3 {
+  margin-top: 0;
+  margin-bottom: 6px;
+  color: #f8fafc;
+}
+
+.section-desc {
+  color: #94a3b8;
+  font-size: 0.88rem;
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 18px;
+}
+
+@media (max-width: 820px) {
+  .grid-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Autenticación */
+#auth-section {
+  max-width: 440px;
+  margin: 24px auto;
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tab-btn {
+  flex: 1;
+  background: #27272a;
+  color: #cbd5e1;
+  border: 1px solid #3f3f46;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.tab-btn.active {
+  background: #ef5350;
+  color: #fff;
+  border-color: #ef5350;
+}
+
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 5px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+}
+
+input[type="text"],
+input[type="password"],
+select {
+  background: #121212;
+  border: 1px solid #3f3f46;
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #ef5350;
+}
+
+/* Botones */
+button {
+  font-family: inherit;
+  border: none;
+  padding: 10px 16px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #ef5350;
+  color: #fff;
+}
+.btn-primary:hover:not(:disabled) {
+  background: #dc2626;
+}
+
+.btn-secondary {
+  background: #334155;
+  color: #f8fafc;
+}
+.btn-secondary:hover:not(:disabled) {
+  background: #475569;
+}
+
+.btn-success {
+  background: #10b981;
+  color: #06281e;
+  font-weight: 700;
+}
+.btn-success:hover:not(:disabled) {
+  background: #059669;
+  color: #fff;
+}
+
+.btn-warning {
+  background: #f59e0b;
+  color: #111827;
+  font-weight: 700;
+}
+
+.btn-danger {
+  background: #7f1d1d;
+  color: #fecaca;
+}
+.btn-danger:hover:not(:disabled) {
+  background: #991b1b;
+}
+
+.btn-sm {
+  padding: 7px 12px;
+  font-size: 0.82rem;
+}
+
+/* Panel Sincronización */
+.sync-panel {
+  border-color: #3b82f6;
+  background: linear-gradient(90deg, #172554 0%, #1e1e1e 100%);
+}
+
+.sync-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sync-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Explorador Pokémon */
+.search-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.search-bar input {
+  flex: 1;
+}
+
+.loading-box {
+  display: none;
+  color: #fde047;
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.poke-preview-card {
+  display: none;
+  background: #141414;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.poke-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.poke-badge {
+  background: #27272a;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: #a1a1aa;
+}
+
+.type-pill {
+  background: #3b82f6;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.poke-preview-card img {
+  width: 125px;
+  height: 125px;
+  object-fit: contain;
+}
+
+.poke-stats-row {
+  display: flex;
+  justify-content: space-around;
+  background: #1f2937;
+  padding: 8px;
+  border-radius: 8px;
+  margin: 10px 0 14px 0;
+  font-size: 0.86rem;
+}
+
+.capture-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Lista del Equipo en SQLite */
+.panel-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.counter-pill {
+  background: #27272a;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.filter-bar input[type="text"] {
+  flex: 1;
+  min-width: 140px;
+}
+
+.fav-filter {
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.team-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 240px;
+}
+
+.team-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #141414;
+  border: 1px solid #2e2e2e;
+  border-radius: 10px;
+  padding: 10px 12px;
+  gap: 10px;
+}
+
+.team-item-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.team-item img {
+  width: 60px;
+  height: 60px;
+  background: #1f2937;
+  border-radius: 8px;
+}
+
+.team-meta h4 {
+  margin: 0 0 4px 0;
+  font-size: 0.95rem;
+}
+
+.team-meta p {
+  margin: 2px 0;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.team-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pagination-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid #2e2e2e;
+  font-size: 0.86rem;
+}
+
+/* Consola de Laboratorio */
+.lab-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.console-box {
+  background: #090d16;
+  color: #38bdf8;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 14px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.83rem;
+  max-height: 240px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.empty-text {
+  text-align: center;
+  color: #64748b;
+  margin-top: 40px;
+}

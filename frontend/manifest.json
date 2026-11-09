@@ -1,0 +1,17 @@
+{
+    "name": "Aplicación de Prueba",
+    "short_name": "PruebaPWA",
+    "description": "Una prueba de PWA",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#8C4830",
+    "icons": [
+        {
+            "src": "https://cdn-icons-png.flaticon.com/512/188/188987.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "orientation": "portrait"
+}
