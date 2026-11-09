@@ -1,7 +1,7 @@
 // ============================================================================
 // CONFIGURACIÓN Y ESTADO DE LA APLICACIÓN
 // ============================================================================
-const API_BASE_URL = 'https://railway.app/proyectoasolucionar-pok-trainer-production.up.railway.app';
+const API_BASE_URL = 'https://proyectoasolucionar-pok-trainer-production.up.railway.app/api';
 const PAGE_LIMIT = 4;
 
 
