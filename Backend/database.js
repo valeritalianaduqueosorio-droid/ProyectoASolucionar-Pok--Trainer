@@ -57,7 +57,8 @@ async function inicializarEsquema() {
                 password TEXT NOT NULL,
                 token TEXT,
                 region TEXT NOT NULL DEFAULT 'Kanto',
-                preferencias_json TEXT
+                preferencias_json TEXT,
+                fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
         `);
 
@@ -67,14 +68,16 @@ async function inicializarEsquema() {
             CREATE TABLE IF NOT EXISTS capturas (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 usuario_id INTEGER NOT NULL,
-                pokemon_id INTEGER NOT NULL,
+                poke_id INTEGER NOT NULL,
                 nombre TEXT NOT NULL,
                 apodo TEXT,
+                peso_kg REAL,
                 sprite_url TEXT NOT NULL,
                 favorito INTEGER DEFAULT 0,
                 notas TEXT,
                 datos_json TEXT NOT NULL,
                 is_deleted INTEGER DEFAULT 0,
+                fecha_captura TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- ¡Integramos la columna de auditoría!
                 FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
             );
         `);
