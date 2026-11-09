@@ -1,10 +1,9 @@
 // ============================================================================
 // CONFIGURACIÓN Y ESTADO DE LA APLICACIÓN
 // ============================================================================
-const API_BASE_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && window.location.port !== '3000'
-    ? 'http://localhost:3000/api'
-    : '/api';
+const API_BASE_URL = 'https://railway.app';
 const PAGE_LIMIT = 4;
+
 
 let estadoApp = {
     modoAuth: 'login',
